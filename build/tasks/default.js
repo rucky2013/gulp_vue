@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sequence = require('gulp-sequence');
 
 var fTask = ["images",'js','html'];
-var sTask = ['html','css'];
+var sTask = ['css'];
 var tTask = process.env.NODE_ENV === 'production' ? [] : ['browserSync','watch'];
 
 var defaultTask = function(cb){
