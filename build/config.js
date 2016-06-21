@@ -5,6 +5,8 @@ var PUBLIC = 'public'
 var DIST = 'dist'
 var SRC = 'src'
 
+var timestamp = Date.now();
+
 var config = {
     version: '0.1.0',
     root: SRC,
@@ -14,6 +16,17 @@ var config = {
     },
     dev: {
         dest: PUBLIC,
+    },
+    CDN: {
+        cdn: '',
+        exec: '',
+        css: {
+            extensions: ['png','jpg','jpeg','gif'],
+            version:timestamp
+        },
+        img: {},
+        script: {},
+        link: {}
     },
     tasks: {
         browserSync: {
@@ -39,7 +52,7 @@ var config = {
                 removeEmptyAttributes: true,
                 collapseBooleanAttributes: true,
             },
-            htmlInset: {
+            htmlInsert: {
                 css:{
                     path: 'src/static',
                     output: '../static',

@@ -13,6 +13,7 @@ var autoprefixer = require('autoprefixer');
 var px2rem = require('postcss-px2rem');
 var config = require('../config');
 var path = require('path');
+var urlCDN = require('../util/url-cdn');
 
 
 var dev = process.env.NODE_ENV === 'production';
@@ -38,6 +39,7 @@ var cssTask = function(){
     .pipe(gIf(!dev,sourceMap.init({loadMaps: true})))
     .pipe(gIf(checkFilePathExits,less()))
     .pipe(postcss(postcssConfig))
+    .pipe(urlCDN(config.CDN))
     .pipe(gIf(!dev,sourceMap.write('./maps')))
     .pipe(rename(function(p){
         p.dirname = '';

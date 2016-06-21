@@ -13,5 +13,6 @@ export default {
 <style scoped>
 h1{
     text-align: center;
+    background: url('images/img.jpg');
 }
 </style>

@@ -11,8 +11,9 @@ var config = require('../config'),
     rename = require('gulp-rename'),
     htmlmin = require('gulp-htmlmin'),
     changed = require('gulp-changed'),
-    plumber = require('gulp-plumber');
-    htmlInset = require('../util/html-inset');
+    plumber = require('gulp-plumber'),
+    htmlInsert = require('../util/html-insert'),
+    urlCDN = require('../util/url-cdn');
 
 var handleError = require('../util/handleError')
 
@@ -36,7 +37,8 @@ var htmlTask = function (){
     })
     .pipe(plumber())
     .pipe(changed(paths.dest))
-    .pipe(htmlInset(config.tasks.html.htmlInset))
+    .pipe(htmlInsert(config.tasks.html.htmlInsert))
+    .pipe(urlCDN(config.CDN))
     .pipe(gIf(dev,htmlmin(config.tasks.html.htmlmin)))
     /**
      * 修改文件输出路径及文件名称 映射 src/views 目录
