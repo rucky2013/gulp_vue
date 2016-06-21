@@ -9,13 +9,14 @@ var config = require('../config');
 var requireTask = {
     html: require('./html'),
     js: require('./js'),
-    images: require('./images')
+    images: require('./images'),
+    css:require('./css')
 }
 
 var bsReload = browser.reload;
 
 var watchTask = function(){
-    var enTask = ['html','js','images']
+    var enTask = ['html','js','images','css']
     enTask.forEach(function(tasks){
         var task = config.tasks[tasks];
         var glob = path.join(config.root,"**/*.{" + task.extensions + "}");

@@ -30,6 +30,9 @@ var scriptHeadReg = getUrlHead('script','src');
 var styleReg = /style=".*?(?=")/ig;
 var styleUrlHeadReg = /style="/;
 
+var cssReg = /(?:<style.*?>).*?(?=<\/style>)/ig;
+var cssHeadReg = /<style.*?>/;
+
 var isRegExp = function(obj){
     return Object.prototype.toString.call(obj) === "[object RegExp]";
 }
@@ -71,11 +74,16 @@ function addVersion(match,option){
 
 function replaceStyle(code,option){
     option = option || {};
-    return code.replace(styleReg,function(match){
+    code =  code.replace(styleReg,function(match){
         var head = styleUrlHeadReg.exec(match)[0];
         match = match.replace(styleUrlHeadReg,'');
         return head + cssUrl(match,option);
-    })
+    });
+    return code.replace(cssReg,function(mathc){
+        var head = cssHeadReg.exec(match)[0];
+        match = match.replace(cssHeadReg,'');
+        return head + cssUrl(match,option);
+    });
 }
 
 module.exports = function(code,option){
